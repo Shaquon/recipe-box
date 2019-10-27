@@ -1,0 +1,10 @@
+<h1>The News as We See It</h1>
+
+<ul>
+    {% for foo in data %}
+        <li>{{ foo.title }}, by {{ foo.author }}</li>
+        <ul>
+            <li>{{ foo.body }}</li>
+        </ul>
+    {% endfor %}
+</ul>
