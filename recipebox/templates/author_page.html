@@ -1,0 +1,14 @@
+
+<h2>{{ author }}</h2>
+
+
+<p>List of my recipes by author: </p>
+{% if recipes %}
+<ul>
+    {% for recipe in recipes %}
+        <li>{{ recipe.title }}</li>
+    {% endfor %}
+{% else %}
+    <h2>Nothing to show</h2>
+{% endif %}
+</ul>

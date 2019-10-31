@@ -2,9 +2,9 @@
 
 <ul>
     {% for foo in data %}
-        <li>{{ foo.title }}, by {{ foo.author }}</li>
+        <li><a href="/recipe/">{{ foo.title }}</a>, by <a href="/author/{{ foo.id }}/">{{ foo.author }}</a></li>
         <ul>
-            <li>{{ foo.body }}</li>
+            <li>{{ foo.description }}</li>
         </ul>
     {% endfor %}
 </ul>

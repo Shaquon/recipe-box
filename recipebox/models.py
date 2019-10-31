@@ -2,28 +2,31 @@
 Author
     Name
 
-NewsItem
-    Date
-    Title 
-    Body
-    author
+RecipeItem
+    Title
+    Author (ForeignKey)
+    Description
+    Time Required
+    Instructions (`TextField`)
  """
+
 from django.db import models
+
 
 class Author(models.Model):
     name = models.CharField(max_length=50)
-
+    bio = models.TextField()
 
     def __str__(self):
         return self.name
 
 
-class NewsItem(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+class RecipeItem(models.Model):
     title = models.CharField(max_length=50)
-    body = models.TextField()
-    date=models.DateTimeField()
-
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    description = models.TextField()
+    prep_time = models.CharField(max_length=50)
+    instructions = models.TextField()
 
     def __str__(self):
         return f"{self.title} - {self.author.name}"
