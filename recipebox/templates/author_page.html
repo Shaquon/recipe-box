@@ -6,7 +6,7 @@
 {% if recipes %}
 <ul>
     {% for recipe in recipes %}
-        <li>{{ recipe.title }}</li>
+        <li><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></li>
     {% endfor %}
 {% else %}
     <h2>Nothing to show</h2>

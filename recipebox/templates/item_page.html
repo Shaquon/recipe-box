@@ -1,10 +1,10 @@
 <h1> {{ data.title }} </h1>
 
-<h3> Item author {{ data.author }} </h3>
-<h3>Item time to make {{ data.prep_time }} </h3>
-<p>{{ data.description }}</p>
-<h3>Directions: </h3>
+<h3> Item author: <a href="/author/{{data.author_id }}/">{{ data.author }}</a> </h3>
+<p><strong>Item time to make: </strong> {{ data.prep_time }} </p>
+
+<p><strong> Item description</strong>: {{ data.description }}</p>
+<h4>Directions: </h4>
 <p>
 {{ data.instructions }}
 </p> 
-<h1>hey</h1>

@@ -11,15 +11,15 @@ def index(request):
     return render(request, html, {'data': recipes})
 
 
-def recipe_item_view(request):
+def recipe_item_view(request, key_id):
     html = 'item_page.html'
 
-    recipes = RecipeItem.objects.all()
+    recipe = RecipeItem.objects.get(pk=key_id)
 
-    return render(request, html, {'data': recipes})
+    return render(request, html, {'data': recipe})
 
 
-def author_add_view(request, key_id):
+def author_view(request, key_id):
 
     html = 'author_page.html'
 

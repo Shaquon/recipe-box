@@ -1,10 +1,11 @@
-<h1>The News as We See It</h1>
+<h1>A wonderful list of recipes! </h1>
 
-<ul>
+<ol>
     {% for foo in data %}
-        <li><a href="/recipe/">{{ foo.title }}</a>, by <a href="/author/{{ foo.author_id }}/">{{ foo.author }}</a></li>
+        <li><a href="/recipe/{{ foo.id }}/">{{ foo.title }}</a>, by <a href="/author/{{ foo.author_id }}/">{{ foo.author }}</a></li>
         <ul>
             <li>{{ foo.description }}</li>
         </ul>
+        <br>
     {% endfor %}
-</ul>
+</ol>
