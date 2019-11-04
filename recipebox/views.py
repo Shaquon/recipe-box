@@ -45,9 +45,9 @@ def add_author_view(request):
 
         if form.is_valid():
             data = form.cleaned_data
-            Author.objects.create(name=data['name'])
+            Author.objects.create(name=data['name'], bio=data['bio'])
 
-        return HttpResponseRedirect(reverse('homepage'))
+            return HttpResponseRedirect(reverse('homepage'))
     form = AuthorAdd()
     return render(request, html, {'form': form})
 

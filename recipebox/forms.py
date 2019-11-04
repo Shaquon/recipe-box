@@ -4,6 +4,7 @@ from recipebox.models import Author
 
 class AuthorAdd(forms.Form):
     name = forms.CharField(max_length=50)
+    bio = forms.CharField(widget=forms.Textarea)
 
 
 class NewsItemAdd(forms.Form):
