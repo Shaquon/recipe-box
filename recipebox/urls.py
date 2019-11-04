@@ -18,6 +18,7 @@ from django.urls import path
 from recipebox import views
 from recipebox.models import Author, RecipeItem
 
+
 admin.site.register(Author)
 admin.site.register(RecipeItem)
 
@@ -25,5 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='homepage'),
     path('recipe/<int:key_id>/', views.recipe_item_view, name='itempage'),
-    path('author/<int:key_id>/', views.author_view, name='authorpage')
+    path('author/<int:key_id>/', views.author_view, name='authorpage'),
+    path('addauthor/', views.add_author_view, name='addauthorpage'),
+    path('additem/', views.add_item_view, name='additempage')
 ]
