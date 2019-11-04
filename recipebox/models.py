@@ -11,6 +11,7 @@ RecipeItem
  """
 
 from django.db import models
+from django.utils import timezone
 
 
 class Author(models.Model):
@@ -27,6 +28,7 @@ class RecipeItem(models.Model):
     description = models.TextField()
     prep_time = models.CharField(max_length=50)
     instructions = models.TextField()
+    post_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"{self.title} - {self.author.name}"
