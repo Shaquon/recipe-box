@@ -12,3 +12,8 @@ class NewsItemAdd(forms.Form):
     description = forms.CharField(widget=forms.Textarea)
     instructions = forms.CharField(widget=forms.Textarea)
     prep_time = forms.CharField(max_length=50)
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput)

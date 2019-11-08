@@ -1,8 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
-from recipebox.models import RecipeItem
-from recipebox.models import Author
-from recipebox.forms import AuthorAdd, NewsItemAdd
 from django.utils import timezone
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from recipebox.models import RecipeItem, Author
+from recipebox.forms import AuthorAdd, NewsItemAdd, LoginForm
 
 
 def index(request):
@@ -13,6 +14,7 @@ def index(request):
     return render(request, html, {'data': recipes})
 
 
+@login_required
 def recipe_item_view(request, key_id):
     html = 'item_page.html'
 
@@ -76,3 +78,25 @@ def add_item_view(request):
     form = NewsItemAdd()
 
     return render(request, html, {'form': form})
+
+
+def login_view(request):
+    html = 'generic_form.html'
+
+    if request.method == 'POST':
+
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            user = authenticate(
+                username=data['username'],
+                password=data['password']
+            )
+            if user:
+                login(request, user)
+                return HttpResponseRedirect(reverse('homepage'))
+
+
+def logout_view(request):
+    pass

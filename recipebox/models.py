@@ -16,8 +16,8 @@ from django.contrib.auth.models import User
 
 
 class Author(models.Model):
-    User = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    User = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=50, default="empty")
     bio = models.TextField()
 
     def __str__(self):
@@ -25,10 +25,10 @@ class Author(models.Model):
 
 
 class RecipeItem(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, default="empty")
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     description = models.TextField()
-    prep_time = models.CharField(max_length=50)
+    prep_time = models.CharField(max_length=50, default="empty")
     instructions = models.TextField()
     post_date = models.DateTimeField(default=timezone.now)
 
