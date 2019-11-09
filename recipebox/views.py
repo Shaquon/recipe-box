@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from recipebox.models import RecipeItem
 from recipebox.models import Author
-from recipebox.forms import AuthorAdd, NewsItemAdd
+from recipebox.forms import AuthorAdd, NewsItemAdd_
 from django.utils import timezone
 
 
@@ -54,11 +54,8 @@ def add_author_view(request):
 
 def add_item_view(request):
     html = "item_add.html"
-
     if request.method == 'POST':
-
-        form = NewsItemAdd(request.POST)
-
+        form = NewsItemAdd_(request.POST)
         if form.is_valid():
 
             data = form.cleaned_data
@@ -70,9 +67,35 @@ def add_item_view(request):
                 prep_time=data['prep_time'],
                 instructions=data['instructions'],
                 post_date=timezone.now()
-            )
-            return HttpResponseRedirect(reverse('homepage'))
+                )
 
-    form = NewsItemAdd()
-
+        return HttpResponseRedirect(reverse('homepage'))
+    form = NewsItemAdd_()
     return render(request, html, {'form': form})
+
+
+# simple form
+# def add_item_view(request):
+#     html = "item_add.html"
+
+#     if request.method == 'POST':
+
+#         form = NewsItemAdd(request.POST)
+
+#         if form.is_valid():
+
+#             data = form.cleaned_data
+
+#             RecipeItem.objects.create(
+#                 title=data['title'],
+#                 author=data['author'],
+#                 description=data['description'],
+#                 prep_time=data['prep_time'],
+#                 instructions=data['instructions'],
+#                 post_date=timezone.now()
+#             )
+#             return HttpResponseRedirect(reverse('homepage'))
+
+#     form = NewsItemAdd()
+
+#     return render(request, html, {'form': form})
