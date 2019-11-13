@@ -19,3 +19,8 @@ class NewsItemAdd_(forms.ModelForm):
     class Meta:
         model = models.RecipeItem
         fields = ['title', 'author', 'description', 'instructions', 'prep_time']
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput)

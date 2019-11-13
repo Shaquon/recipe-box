@@ -3,6 +3,7 @@ from recipebox.models import RecipeItem
 from recipebox.models import Author
 from recipebox.forms import AuthorAdd, NewsItemAdd_
 from django.utils import timezone
+from django.contrib.auth import login, logout, authenticate
 
 
 def index(request):
@@ -74,6 +75,11 @@ def add_item_view(request):
     return render(request, html, {'form': form})
 
 
+def login_view(request):
+    pass
+
+
+def 
 # simple form
 # def add_item_view(request):
 #     html = "item_add.html"
