@@ -1,10 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from recipebox.models import RecipeItem
 from recipebox.models import Author
-from recipebox.forms import AuthorAdd, NewsItemAdd_
+from recipebox.forms import AuthorAdd, NewsItemAdd_, LoginForm
 from django.utils import timezone
 from django.contrib.auth import login, logout, authenticate
-
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     html = 'index.html'
@@ -14,6 +14,7 @@ def index(request):
     return render(request, html, {'data': recipes})
 
 
+@login_required
 def recipe_item_view(request, key_id):
     html = 'item_page.html'
 
@@ -22,6 +23,7 @@ def recipe_item_view(request, key_id):
     return render(request, html, {'data': recipe})
 
 
+@login_required
 def author_view(request, key_id):
 
     html = 'author_page.html'
@@ -36,6 +38,7 @@ def author_view(request, key_id):
         })
 
 
+@login_required
 def add_author_view(request):
 
     html = "author_add.html"
@@ -53,6 +56,7 @@ def add_author_view(request):
     return render(request, html, {'form': form})
 
 
+@login_required
 def add_item_view(request):
     html = "item_add.html"
     if request.method == 'POST':
@@ -76,10 +80,25 @@ def add_item_view(request):
 
 
 def login_view(request):
-    pass
+    html = "item_add.html"
 
+    if request.method == "POST":
+        form = LoginForm(request.POST)
 
-def 
+        if form.is_valid():
+            data = form.cleaned_data
+            user = authenticate(
+                username=data['username'],
+                password=data['password']
+            )
+            if user:
+                login(request, user)
+                return HttpResponseRedirect(reverse('homepage'))
+
+    form = LoginForm()
+
+    return render(request, html, {form: form})
+
 # simple form
 # def add_item_view(request):
 #     html = "item_add.html"
