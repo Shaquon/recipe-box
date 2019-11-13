@@ -5,6 +5,8 @@ from recipebox.forms import AuthorAdd, NewsItemAdd_, LoginForm
 from django.utils import timezone
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 
 def index(request):
     html = 'index.html'
@@ -14,7 +16,6 @@ def index(request):
     return render(request, html, {'data': recipes})
 
 
-@login_required
 def recipe_item_view(request, key_id):
     html = 'item_page.html'
 
@@ -23,7 +24,6 @@ def recipe_item_view(request, key_id):
     return render(request, html, {'data': recipe})
 
 
-@login_required
 def author_view(request, key_id):
 
     html = 'author_page.html'
@@ -49,7 +49,15 @@ def add_author_view(request):
 
         if form.is_valid():
             data = form.cleaned_data
-            Author.objects.create(name=data['name'], bio=data['bio'])
+            u = User.objects.create_user(
+                username=data['name'],
+                password=data['password']
+            )
+            Author.objects.create(
+                user=u,
+                name=data['name'],
+                bio=data.get('bio')
+            )
 
             return HttpResponseRedirect(reverse('homepage'))
     form = AuthorAdd()
@@ -80,7 +88,7 @@ def add_item_view(request):
 
 
 def login_view(request):
-    html = "item_add.html"
+    html = "log_in.html"
 
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -93,11 +101,19 @@ def login_view(request):
             )
             if user:
                 login(request, user)
-                return HttpResponseRedirect(reverse('homepage'))
+                return HttpResponseRedirect(
+                    request.GET.get('next', reverse('homepage'))
+                    )
 
     form = LoginForm()
 
-    return render(request, html, {form: form})
+    return render(request, html, {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('homepage'))
+
 
 # simple form
 # def add_item_view(request):
