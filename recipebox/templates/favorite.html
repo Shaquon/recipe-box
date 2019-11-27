@@ -1,0 +1,20 @@
+<h2>{{ author }}</h2>
+
+
+<p>Favorites: </p>
+{% if recipes %}
+<ul>
+    {% for recipe in recipes %}
+        <li><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></li>
+    {% endfor %}
+    <br>
+    <hr>
+    Navigation: 
+    <a style ="border: 1px solid black; padding: 2px;" href="/addauthor/">Add an Author</a>
+    <a style ="border: 1px solid black; padding: 2px;" href="/additem/">Add a Recipe</a>
+    <a style ="border: 1px solid black; padding: 2px;" href="/">Home</a>
+    <a style ="border: 1px solid black; padding: 2px;" href="/logout/">Logout</a>
+{% else %}
+    <h2>Nothing to show</h2>
+{% endif %}
+</ul>

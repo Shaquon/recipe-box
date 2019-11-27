@@ -6,6 +6,11 @@
         <ul>
             <li>{{ foo.description }}</li>
         </ul>
+        <a href= "/editrecipe/{{ foo.id }}/"><button>Edit</button></a>
+        {% if user.is_authenticated %}
+        <a href= "/favorite/{{ foo.id }}/"><button>Favorite</button></a>
+        <a href= "/unfavorite/{{ foo.id }}/"><button>Unfavorite</button></a>
+        {% endif %}
         <br>
     {% endfor %}
         <hr>

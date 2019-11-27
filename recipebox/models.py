@@ -19,6 +19,7 @@ class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=50)
     bio = models.TextField()
+    favorite = models.ManyToManyField('RecipeItem', symmetrical=False, blank=True,related_name='favorite')
 
     def __str__(self):
         return self.name
@@ -26,7 +27,7 @@ class Author(models.Model):
 
 class RecipeItem(models.Model):
     title = models.CharField(max_length=50)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='author')
     description = models.TextField()
     prep_time = models.CharField(max_length=50)
     instructions = models.TextField()

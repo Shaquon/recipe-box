@@ -9,6 +9,18 @@
         <li><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></li>
     {% endfor %}
     <br>
+{% else %}
+    <h2>Nothing to show</h2>
+{% endif %}
+</ul>
+
+<p>Favorite Recipes: </p>
+{% if favorites %}
+<ul>
+    {% for favorite in favorites %}
+        <li><a href="/recipe/{{ favorite.id }}/">{{ favorite.title }}</a></li>
+    {% endfor %}
+    <br>
     <hr>
     Navigation: 
     <a style ="border: 1px solid black; padding: 2px;" href="/addauthor/">Add an Author</a>
@@ -17,5 +29,9 @@
     <a style ="border: 1px solid black; padding: 2px;" href="/logout/">Logout</a>
 {% else %}
     <h2>Nothing to show</h2>
+    Navigation: 
+    <a style ="border: 1px solid black; padding: 2px;" href="/addauthor/">Add an Author</a>
+    <a style ="border: 1px solid black; padding: 2px;" href="/additem/">Add a Recipe</a>
+    <a style ="border: 1px solid black; padding: 2px;" href="/">Home</a>
+    <a style ="border: 1px solid black; padding: 2px;" href="/logout/">Logout</a>
 {% endif %}
-</ul>
