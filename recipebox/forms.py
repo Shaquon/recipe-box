@@ -5,6 +5,7 @@ from . import models
 class AuthorAdd(forms.Form):
     name = forms.CharField(max_length=50)
     bio = forms.CharField(widget=forms.Textarea)
+    password = forms.CharField(widget=forms.PasswordInput)
 
 
 class NewsItemAdd(forms.Form):
@@ -19,6 +20,12 @@ class NewsItemAdd_(forms.ModelForm):
     class Meta:
         model = models.RecipeItem
         fields = ['title', 'author', 'description', 'instructions', 'prep_time']
+
+
+class EditRecipeForm(forms.ModelForm):
+    class Meta:
+        model = models.RecipeItem
+        fields =  ['title', 'description', 'instructions', 'prep_time']
 
 
 class LoginForm(forms.Form):
